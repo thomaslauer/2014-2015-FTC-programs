@@ -49,7 +49,7 @@ void clearPID(PID &pid)
 	initPID(pid, pid.kp, pid.ki, pid.kd, 0.0, pid.timer.hardwareTimer);
 }
 
-float getPIDValue(float input, PID &pid)
+float getPIDValue(PID &pid, float input)
 {
 	float currentError = pid.target - input;
 	int deltaTime = getTimerValue(pid.timer);
