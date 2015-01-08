@@ -1,5 +1,6 @@
 #include "hardwareDefinitions.h"
 #include "motorControl.h"
+#include "driverUtils.h"
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
 void initializeRobot()
@@ -40,16 +41,21 @@ task main()
 
 		if(abs(joystick.joy1_y2) >= 5)
 		{
-			motor[RIGHT_DRIVE_MOTOR] = joystick.joy1_y2;
+			if(joystick.joy1_y2 > 0)
+				motor[RIGHT_DRIVE_MOTOR] = exponentialDrive(joystick.joy1_y2);
+			else
+				motor[RIGHT_DRIVE_MOTOR] = exponentialDrive(joystick.joy1_y2);
 		}
 		else
 		{
 			motor[RIGHT_DRIVE_MOTOR] = 0;
 		}
-
 		if(abs(joystick.joy1_y1) >= 5)
 		{
-			motor[LEFT_DRIVE_MOTOR] = joystick.joy1_y1;
+			if(joystick.joy1_y1 > 0)
+				motor[LEFT_DRIVE_MOTOR] = exponentialDrive(joystick.joy1_y1);
+			else
+				motor[LEFT_DRIVE_MOTOR] = exponentialDrive(joystick.joy1_y1);
 		}
 		else
 		{
