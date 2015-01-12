@@ -8,12 +8,14 @@ void initializeRobot()
   return;
 }
 
+// task to run driver 2 stuff
 task scoring()
 {
 	while(true)
 	{
 		getJoystickSettings(joystick);
-
+		
+		// controls for the servo tube grabbers
 		if(joy2Btn(1))
 		{
 			moveTubeServo(UP);
@@ -27,16 +29,14 @@ task scoring()
 
 task main()
 {
-  initializeRobot();
-
-  waitForStart();
+	initializeRobot();
+	
+	waitForStart();
+	
 	startTask(scoring);
-  while (true)
-  {
+	while (true)
+	{
 		getJoystickSettings(joystick);
-
-		//TODO: add (small) deadzone
-		//TODO: add exponential controls
 		//TODO: add nudge controls
 
 		if(abs(joystick.joy1_y2) >= 5)
