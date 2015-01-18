@@ -45,8 +45,8 @@ const TServoIndex LEFT_TUBE_SERVO = servo3;
 const int LEFT_TUBE_UP = 127;
 const int LEFT_TUBE_DOWN = 15;
 
-// port for the smux controller
-const tSensors SMUX = S4;
+// port for the gyro sensor
+const tSensors GYRO_PORT = S2;
 
 // resets the positions of all the servos
 void resetPositions()

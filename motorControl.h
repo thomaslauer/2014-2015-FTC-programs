@@ -3,6 +3,9 @@
 
 #include "hardwareDefinitions.h"
 
+#include "gyro.h"
+#include "PID.h"
+
 // movement directions
 enum MoveDirections
 {
@@ -33,12 +36,12 @@ void move(MoveDirections direction, int speed)
 			motor[LEFT_DRIVE_MOTOR] 	= -speed;
 			break;
 		case RIGHT:
-			motor[RIGHT_DRIVE_MOTOR] 	= speed;
-			motor[LEFT_DRIVE_MOTOR] 	= -speed;
-			break;
-		case LEFT:
 			motor[RIGHT_DRIVE_MOTOR] 	= -speed;
 			motor[LEFT_DRIVE_MOTOR] 	= speed;
+			break;
+		case LEFT:
+			motor[RIGHT_DRIVE_MOTOR] 	= speed;
+			motor[LEFT_DRIVE_MOTOR] 	= -speed;
 			break;
 		case FORWARD_RIGHT:
 			motor[RIGHT_DRIVE_MOTOR] 	= 0;
@@ -100,4 +103,20 @@ void raiseWinch()
 	moveWinch(50);
 	wait1Msec(750);
 	moveWinch(0);
+}
+
+void gyroTurn(Gyro &g, PID &p, int angle, int speed)
+{
+	initPID(p, 1, 0.0000001, 1, T2);
+	setPIDTarget(p, angle);
+	g.heading = 0;
+	while(true)
+	{
+		float currentPidValue = getPIDValue(p, g.heading);
+		//displayTextLine(1, "heading: %d", g.heading);
+		//displayTextLine(2, "PID error: %d", p.lastError);
+		//displayTextLine(3, "value: %d", currentPidValue);
+		move(RIGHT, currentPidValue);
+		updateGyro(g);
+	}
 }
