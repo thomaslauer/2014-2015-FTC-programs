@@ -88,3 +88,16 @@ void moveTubeServo(TubeServoPositions position)
 		servo[RIGHT_TUBE_SERVO] = RIGHT_TUBE_DOWN;
 	}
 }
+
+void moveWinch(int power)
+{
+	motor[RIGHT_WINCH] = power;
+	motor[LEFT_WINCH] = power;
+}
+
+void raiseWinch()
+{
+	moveWinch(50);
+	wait1Msec(750);
+	moveWinch(0);
+}

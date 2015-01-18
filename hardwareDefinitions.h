@@ -7,13 +7,13 @@
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     motorE,        tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C2_1,     motorF,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C2_2,     motorG,        tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C2_1,     motorF,        tmotorTetrix, openLoop, reversed)
+#pragma config(Motor,  mtr_S1_C2_2,     motorG,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_1,     motorH,        tmotorTetrix, openLoop)
-#pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C4_1,    servo1,               tServoStandard)
-#pragma config(Servo,  srvo_S1_C4_2,    servo2,               tServoNone)
-#pragma config(Servo,  srvo_S1_C4_3,    servo3,               tServoNone)
+#pragma config(Servo,  srvo_S1_C4_2,    servo2,               tServoStandard)
+#pragma config(Servo,  srvo_S1_C4_3,    servo3,               tServoStandard)
 #pragma config(Servo,  srvo_S1_C4_4,    servo4,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_5,    servo5,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_6,    servo6,               tServoNone)
@@ -23,9 +23,12 @@
 const tMotor RIGHT_DRIVE_MOTOR = motorD;
 const tMotor LEFT_DRIVE_MOTOR = motorE;
 
+const tMotor RIGHT_WINCH 	= motorF;
+const tMotor LEFT_WINCH 	= motorG;
+
 // spinner motors
-const tMotor RIGHT_SPINNER = motorF;
-const tMotor LEFT_SPINNER = motorG;
+const tMotor RIGHT_SPINNER = motorH;
+const tMotor LEFT_SPINNER = motorI;
 
 // the dumper servo on the schlorp tube
 const TServoIndex DUMP_SERVO = servo1;

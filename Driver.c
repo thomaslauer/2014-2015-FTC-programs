@@ -14,15 +14,37 @@ task scoring()
 	while(true)
 	{
 		getJoystickSettings(joystick);
-		
+
 		// controls for the servo tube grabbers
-		if(joy2Btn(1))
+		if(joy2Btn(4))
 		{
 			moveTubeServo(UP);
 		}
-		if(joy2Btn(2))
+		if(joy2Btn(3))
 		{
 			moveTubeServo(DOWN);
+		}
+
+		if(joy2Btn(6))
+		{
+			moveWinch(100);
+		}
+		else if(joy2Btn(5))
+		{
+			moveWinch(-100);
+		}
+		else
+		{
+			moveWinch(0);
+		}
+
+		if(joy2Btn(1))
+		{
+			servo[DUMP_SERVO] = DUMP_UP;
+		}
+		else if(joy2Btn(2))
+		{
+			servo[DUMP_SERVO] = DUMP_DOWN;
 		}
 	}
 }
@@ -30,15 +52,16 @@ task scoring()
 task main()
 {
 	initializeRobot();
-	
+
 	waitForStart();
-	
+
 	startTask(scoring);
 	while (true)
 	{
 		getJoystickSettings(joystick);
 		//TODO: add nudge controls
 
+		// drive controls and deadzone
 		if(abs(joystick.joy1_y2) >= 5)
 		{
 			if(joystick.joy1_y2 > 0)
@@ -62,6 +85,8 @@ task main()
 			motor[LEFT_DRIVE_MOTOR] = 0;
 		}
 
+
+		// spinner controls
 		if(joy1Btn(6))
 		{
 			motor[RIGHT_SPINNER] = 100;
