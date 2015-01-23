@@ -98,6 +98,14 @@ void moveWinch(int power)
 	motor[LEFT_WINCH] = power;
 }
 
+void moveWinch(int power, int time)
+{
+	motor[RIGHT_WINCH] = power;
+	motor[LEFT_WINCH] = power;
+	wait1Msec(time);
+	moveWinch(0);
+}
+
 void raiseWinch()
 {
 	moveWinch(50);

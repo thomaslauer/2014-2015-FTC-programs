@@ -32,13 +32,13 @@ const tMotor LEFT_SPINNER = motorI;
 
 // the dumper servo on the schlorp tube
 const TServoIndex DUMP_SERVO = servo1;
-const int DUMP_UP = 0;
-const int DUMP_DOWN = 140;
+const int DUMP_UP = 5;
+const int DUMP_DOWN = 130;
 
 // right servo for grabbing tubes
 const TServoIndex RIGHT_TUBE_SERVO = servo2;
 const int RIGHT_TUBE_UP = 127;
-const int RIGHT_TUBE_DOWN = 240;
+const int RIGHT_TUBE_DOWN = 250;
 
 // left servo for grabbing tubes
 const TServoIndex LEFT_TUBE_SERVO = servo3;
