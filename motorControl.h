@@ -177,13 +177,13 @@ void gyroTurn(Gyro &g, int angle, int power)
 		while (running) {
 			updateGyro(g);
 
-			if (abs(g.heading) > abs(angle)){
+			if (abs(g.heading) < abs(angle)){
 				returning = true;
 			}
 			if (returning){
 				motor[RIGHT_DRIVE_MOTOR] = ((float)power * returningSpeed);
 				motor[LEFT_DRIVE_MOTOR] = -((float)power * returningSpeed);
-				if (abs(g.heading) < abs(angle)){
+				if (abs(g.heading) > abs(angle)){
 					running = false;
 					writeDebugStreamLine("Final GyroVal: %f", gyroVal);
 				}
