@@ -113,18 +113,83 @@ void raiseWinch()
 	moveWinch(0);
 }
 
+
+/*
+removed the old gyroTurn method, because it didn't work
+*/
+
+/*
 void gyroTurn(Gyro &g, PID &p, int angle, int speed)
 {
-	initPID(p, 1, 0.0000001, 1, T2);
-	setPIDTarget(p, angle);
-	g.heading = 0;
-	while(true)
+initPID(p, 1, 0.0000001, 1, T2);
+setPIDTarget(p, angle);
+g.heading = 0;
+while(true)
+{
+float currentPidValue = getPIDValue(p, g.heading);
+//displayTextLine(1, "heading: %d", g.heading);
+//displayTextLine(2, "PID error: %d", p.lastError);
+//displayTextLine(3, "value: %d", currentPidValue);
+move(RIGHT, currentPidValue);
+updateGyro(g);
+}
+}
+*/
+
+
+void gyroTurn(Gyro &g, int angle, int power)
+{
+	const float returningSpeed = 0.25;
+
+
+	if (angle < 0)
 	{
-		float currentPidValue = getPIDValue(p, g.heading);
-		//displayTextLine(1, "heading: %d", g.heading);
-		//displayTextLine(2, "PID error: %d", p.lastError);
-		//displayTextLine(3, "value: %d", currentPidValue);
-		move(RIGHT, currentPidValue);
-		updateGyro(g);
+		motor[RIGHT_DRIVE_MOTOR] = power;
+		motor[LEFT_DRIVE_MOTOR] = -power;
+		float gyroVal = 0;
+		bool running = true;
+		bool returning = false;
+		while (running) {
+			updateGyro(g);
+			
+			if (abs(g.heading) > abs(angle)){
+				returning = true;
+			}
+			if (returning){
+				motor[RIGHT_DRIVE_MOTOR] = -((float)power * returningSpeed);
+				motor[LEFT_DRIVE_MOTOR] = ((float)power * returningSpeed);
+				if (abs(g.heading) < abs(angle)){
+					running = false;
+					writeDebugStreamLine("Final GyroVal: %f", gyroVal);
+				}
+			}
+
+			wait1Msec(5);
+		}
+	}
+	else if (angle > 0)
+	{
+		motor[RIGHT_DRIVE_MOTOR] = -power;
+		motor[LEFT_DRIVE_MOTOR] = power;
+		float gyroVal = 0;
+		bool running = true;
+		bool returning = false;
+		while (running) {
+			updateGyro(g);
+
+			if (abs(g.heading) > abs(angle)){
+				returning = true;
+			}
+			if (returning){
+				motor[RIGHT_DRIVE_MOTOR] = ((float)power * returningSpeed);
+				motor[LEFT_DRIVE_MOTOR] = -((float)power * returningSpeed);
+				if (abs(g.heading) < abs(angle)){
+					running = false;
+					writeDebugStreamLine("Final GyroVal: %f", gyroVal);
+				}
+			}
+
+			wait1Msec(5);
+		}
 	}
 }

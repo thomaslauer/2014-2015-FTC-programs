@@ -50,3 +50,9 @@ void updateGyro(Gyro& gyro)
 	gyro.heading += speed * ((float)readTimer(gyro.m_timer) / 1000.0);
 	resetTimer(gyro.m_timer);
 }
+
+void resetGyro(Gyro& g)
+{
+	g.heading = 0;
+	resetTimer(g.m_timer);
+}
