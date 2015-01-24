@@ -31,5 +31,14 @@ task main()
 	motor[RIGHT_DRIVE_MOTOR]=50;
 	motor[LEFT_DRIVE_MOTOR]=-50;
 	wait1Msec(1500);
-	move(BACKWARD, 50, 2500);
+	move(BACKWARD, 50, 2550);
+	motor[RIGHT_DRIVE_MOTOR]=-50;
+	motor[LEFT_DRIVE_MOTOR]=-50;
+	moveTubeServo(DOWN);
+	wait1Msec(200);
+	motor[RIGHT_DRIVE_MOTOR]=0;
+	motor[LEFT_DRIVE_MOTOR]=0;
+	wait1Msec(300);
+	move(FORWARD, 30, 200);
+
 }
