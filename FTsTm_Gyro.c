@@ -11,14 +11,15 @@ void init()
 	resetPositions();
 	initGyro(g, S2);
 	calibrateGyro(g);
+	//waitForStart();
+	moveTubeServo(UP);
+	raiseWinch();
 }
 
 task main()
 {
 	init();
-	//waitForStart();
-	moveTubeServo(UP);
-	raiseWinch();
+
 
 	move(BACKWARD, 50, 1000);
 
@@ -58,7 +59,7 @@ task main()
 
 	gyroTurn(g, -147, 75);
 
-	move(BACKWARD, 50, 800);
+	move(BACKWARD, 50, 1400);
 
 
 
