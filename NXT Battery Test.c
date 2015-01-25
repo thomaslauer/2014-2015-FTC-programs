@@ -1,8 +1,11 @@
+#include "battery.h"
+
 task main()
 {
 
   while(true){
-  		displayTextLine(1, "nxt batt: %f", nImmediateBatteryLevel/1000);
-  		//displays battery level of nxt on brick display
+  		displayCenteredTextLine(1, "BATTERY TESTER");
+  		displayTextLine(3, "NXT: %1.3f", (float)getNXTBattery()/1000.0);
+  		displayTextLine(4, "EXT: %2.2f", (float)getExternalBattery()/1000.0);
   	}
 }
