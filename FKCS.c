@@ -43,7 +43,8 @@ task main()
 
 	if(irSeeker.acDirection >= 5)
 	{
-		// turn and duump
+		gyroTurn(-90, 50);
+		w
 		move(BACKWARD, 50, 850);
 		wait1Msec(500);
 		gyroTurn(g, 85, 50);
@@ -58,15 +59,6 @@ task main()
 		if(irSeeker.acDirection >= 5)
 		{
 			// duump here
-		move(BACKWARD, 50, 850);
-		wait1Msec(500);
-		gyroTurn(g, 85, 50);
-		wait1Msec(250);
-		move(FORWARD, 75, 350);
-		wait1Msec(250);
-		gyroTurn(g, 55, 100);
-		move(FORWARD, 75, 250);
-
 		}
 		else
 		{
@@ -78,14 +70,6 @@ task main()
 
 
 			// duump in the other one
-			move(BACKWARD, 50, 850);
-			wait1Msec(500);
-			gyroTurn(g, 85, 50);
-			wait1Msec(250);
-			move(FORWARD, 75, 350);
-			wait1Msec(500);
-			gyroTurn(g, 35, 100);
-			move(FORWARD, 100, 1000);
 		}
 	}
 

@@ -201,6 +201,6 @@ void gyroTurn(Gyro &g, int angle, int power)
 			wait1Msec(5);
 		}
 	}
-
+	move(STOP, 0);
 	resetGyro(g);
 }

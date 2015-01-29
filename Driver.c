@@ -3,6 +3,8 @@
 #include "driverUtils.h"
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
+const int nudgeSpeed = 25;
+
 void initializeRobot()
 {
   return;
@@ -56,6 +58,9 @@ task main()
 	waitForStart();
 
 	startTask(scoring);
+
+	bool rightDead = false;
+	bool leftDead = false;
 	while (true)
 	{
 		getJoystickSettings(joystick);
@@ -64,6 +69,7 @@ task main()
 		// drive controls and deadzone
 		if(abs(joystick.joy1_y2) >= 5)
 		{
+			rightDead = false;
 			if(joystick.joy1_y2 > 0)
 				motor[RIGHT_DRIVE_MOTOR] = exponentialDrive(joystick.joy1_y2);
 			else
@@ -71,10 +77,11 @@ task main()
 		}
 		else
 		{
-			motor[RIGHT_DRIVE_MOTOR] = 0;
+			rightDead = true;
 		}
 		if(abs(joystick.joy1_y1) >= 5)
 		{
+			leftDead = false;
 			if(joystick.joy1_y1 > 0)
 				motor[LEFT_DRIVE_MOTOR] = exponentialDrive(joystick.joy1_y1);
 			else
@@ -82,9 +89,50 @@ task main()
 		}
 		else
 		{
-			motor[LEFT_DRIVE_MOTOR] = 0;
+			leftDead = true;
 		}
 
+		// nudge controls
+
+		if(rightDead && leftDead)
+		{
+			if(joystick.joy1_TopHat == -1)
+			{
+				move(STOP, 0);
+			}
+			if(joystick.joy1_TopHat == 0)
+			{
+				move(FORWARD, nudgeSpeed);
+			}
+			if(joystick.joy1_TopHat == 1)
+			{
+				move(FORWARD_RIGHT, nudgeSpeed);
+			}
+			if(joystick.joy1_TopHat == 2)
+			{
+				move(RIGHT, nudgeSpeed);
+			}
+			if(joystick.joy1_TopHat == 3)
+			{
+				move(BACKWARD_RIGHT, nudgeSpeed);
+			}
+			if(joystick.joy1_TopHat == 4)
+			{
+				move(BACKWARD, nudgeSpeed);
+			}
+			if(joystick.joy1_TopHat == 5)
+			{
+				move(BACKWARD_LEFT, nudgeSpeed);
+			}
+			if(joystick.joy1_TopHat == 6)
+			{
+				move(LEFT, nudgeSpeed);
+			}
+			if(joystick.joy1_TopHat == 7)
+			{
+				move(FORWARD_LEFT, nudgeSpeed);
+			}
+		}
 
 		// spinner controls
 		if(joy1Btn(6))

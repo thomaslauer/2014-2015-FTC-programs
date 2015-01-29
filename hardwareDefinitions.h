@@ -32,7 +32,7 @@ const tMotor LEFT_SPINNER = motorI;
 
 // the dumper servo on the schlorp tube
 const TServoIndex DUMP_SERVO = servo1;
-const int DUMP_UP = 5;
+const int DUMP_UP = 10;
 const int DUMP_DOWN = 130;
 
 // right servo for grabbing tubes
@@ -47,6 +47,9 @@ const int LEFT_TUBE_DOWN = 15;
 
 // port for the gyro sensor
 const tSensors GYRO_PORT = S2;
+
+//port for IR sensor
+const tSensors IR_PORT = S3;
 
 // resets the positions of all the servos
 void resetPositions()
