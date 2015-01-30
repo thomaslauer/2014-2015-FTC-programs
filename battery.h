@@ -10,6 +10,20 @@ int getNXTBattery()
 
 int getExternalBattery()
 {
-	int value = externalBatteryAvg;
-	return value;
+	return externalBatteryAvg;
+}
+
+const int NXTLow = 8000;
+const int ExtLow = 14000;
+
+void batteryError()
+{
+	if (getNXTBattery() < NXTLow)
+	{
+		// play error tone and display error
+	}
+	if (getExternalBattery() < ExtLow)
+	{
+		// play error tone and display error
+	}
 }
