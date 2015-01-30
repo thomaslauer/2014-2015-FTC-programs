@@ -15,7 +15,7 @@ void init()
 	calibrateGyro(g);
 	initSensor(&irSeeker, IR_PORT);
 	irSeeker.mode = DSP_1200;
-	//waitForStart();
+	waitForStart();
 	raiseWinch();
 
 
@@ -39,14 +39,14 @@ task main()
 	startTask(updateSensor);
 	move(FORWARD, 50, 1400);
 	wait1Msec(500);
-	gyroTurn(g, -90, 100);
+	gyroTurn(g, -100, 100);
 
 	if(irSeeker.acDirection >= 5)
 	{
 		// turn and duump
 		move(BACKWARD, 50, 850);
 		wait1Msec(500);
-		gyroTurn(g, 85, 50);
+		gyroTurn(g, 100, 50);
 		wait1Msec(250);
 		move(FORWARD, 75, 1000);
 	}
@@ -54,17 +54,17 @@ task main()
 	{
 		move(FORWARD, 50, 700);
 		wait1Msec(500);
-		gyroTurn(g, 45, 100);
+		gyroTurn(g, 100, 100);
 		if(irSeeker.acDirection >= 5)
 		{
 			// duump here
 		move(BACKWARD, 50, 850);
 		wait1Msec(500);
-		gyroTurn(g, 85, 50);
+		gyroTurn(g, 100, 50);
 		wait1Msec(250);
 		move(FORWARD, 75, 350);
 		wait1Msec(250);
-		gyroTurn(g, 55, 100);
+		gyroTurn(g, 100, 100);
 		move(FORWARD, 75, 250);
 
 		}
@@ -73,18 +73,18 @@ task main()
 
 			move(FORWARD, 50, 700);
 			wait1Msec(500);
-			gyroTurn(g, 45, 100);
+			gyroTurn(g, 100, 100);
 
 
 
 			// duump in the other one
 			move(BACKWARD, 50, 850);
 			wait1Msec(500);
-			gyroTurn(g, 85, 50);
+			gyroTurn(g, 100, 50);
 			wait1Msec(250);
 			move(FORWARD, 75, 350);
 			wait1Msec(500);
-			gyroTurn(g, 35, 100);
+			gyroTurn(g, 100, 100);
 			move(FORWARD, 100, 1000);
 		}
 	}

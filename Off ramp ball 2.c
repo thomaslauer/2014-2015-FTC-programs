@@ -17,7 +17,7 @@ void init()
 task main()
 {
 	init();
-	//waitForStart();
+	waitForStart();
 	moveTubeServo(UP);
 	raiseWinch();
 

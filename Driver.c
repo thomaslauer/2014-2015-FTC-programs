@@ -65,7 +65,7 @@ task main()
 	{
 		getJoystickSettings(joystick);
 		//TODO: add nudge controls
-
+		alive();
 		// drive controls and deadzone
 		if(abs(joystick.joy1_y2) >= 5)
 		{
@@ -135,12 +135,12 @@ task main()
 		}
 
 		// spinner controls
-		if(joy1Btn(6))
+		if(joy1Btn(5))
 		{
 			motor[RIGHT_SPINNER] = 100;
 			motor[LEFT_SPINNER] = 100;
 		}
-		else if(joy1Btn(5))
+		else if(joy1Btn(6))
 		{
 			motor[RIGHT_SPINNER] = -100;
 			motor[LEFT_SPINNER] = -100;
