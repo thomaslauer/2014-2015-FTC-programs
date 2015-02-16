@@ -137,18 +137,15 @@ task main()
 		// spinner controls
 		if(joy1Btn(5))
 		{
-			motor[RIGHT_SPINNER] = 100;
-			motor[LEFT_SPINNER] = 100;
+			motor[SPINNER_MOTOR] = 75;
 		}
 		else if(joy1Btn(6))
 		{
-			motor[RIGHT_SPINNER] = -100;
-			motor[LEFT_SPINNER] = -100;
+			motor[SPINNER_MOTOR] = -75;
 		}
 		else
 		{
-			motor[RIGHT_SPINNER] = 0;
-			motor[LEFT_SPINNER] = 0;
+			motor[SPINNER_MOTOR] = 0;
 		}
   }
 }

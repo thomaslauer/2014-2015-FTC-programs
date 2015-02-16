@@ -11,7 +11,7 @@ void init()
 	resetPositions();
 	initGyro(g, S2);
 	calibrateGyro(g);
-	//waitForStart();
+	waitForStart();
 	moveTubeServo(UP);
 	raiseWinch();
 }
@@ -24,7 +24,7 @@ task main()
 	move(BACKWARD, 50, 1000);
 
 	wait1Msec(500);
-	gyroTurn(g, 33, 75);
+	gyroTurn(g, 40, 75);
 	//motor[RIGHT_DRIVE_MOTOR]=-50;
 	//motor[LEFT_DRIVE_MOTOR]=50;
 	//wait1Msec(1000);
@@ -34,14 +34,14 @@ task main()
 	//motor[LEFT_DRIVE_MOTOR]=-50;
 	//wait1Msec(1500);
 	wait1Msec(500);
-	gyroTurn(g, -33, 75);
+	gyroTurn(g, -35, 75);
 
 	motor[RIGHT_DRIVE_MOTOR] = -40;
 	motor[LEFT_DRIVE_MOTOR] = -40;
-	wait1Msec(2300);
+	wait1Msec(2100);
 
 	moveTubeServo(DOWN);
-	wait1Msec(100);
+	wait1Msec(300);
 
 	move(STOP, 0);
 
@@ -60,7 +60,4 @@ task main()
 	gyroTurn(g, -147, 75);
 
 	move(BACKWARD, 50, 1400);
-
-
-
 }
