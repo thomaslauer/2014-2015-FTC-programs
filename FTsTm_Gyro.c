@@ -11,9 +11,9 @@ void init()
 	resetPositions();
 	initGyro(g, S2);
 	calibrateGyro(g);
-	waitForStart();
+	//waitForStart();
 	moveTubeServo(UP);
-	raiseWinch();
+	//raiseWinch();
 }
 
 task main()

@@ -39,8 +39,8 @@ TO ADD AN ENTRY:
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     motorE,        tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C2_1,     motorF,        tmotorTetrix, openLoop, reversed)
-#pragma config(Motor,  mtr_S1_C2_2,     motorG,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_1,     motorF,        tmotorTetrix, openLoop)
+#pragma config(Motor,  mtr_S1_C2_2,     motorG,        tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C3_1,     motorH,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C3_2,     motorI,        tmotorTetrix, openLoop, reversed)
 #pragma config(Servo,  srvo_S1_C4_1,    servo1,               tServoStandard)
@@ -49,6 +49,8 @@ TO ADD AN ENTRY:
 #pragma config(Servo,  srvo_S1_C4_4,    servo4,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_5,    servo5,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_6,    servo6,               tServoNone)
+
+#include "JoystickDriver.c"
 
 // drive motor definitions
 const tMotor RIGHT_DRIVE_MOTOR			= motorD;
@@ -68,18 +70,26 @@ const int DUMP_DOWN 								= 60;
 // right servo for grabbing tubes
 const TServoIndex RIGHT_TUBE_SERVO 	= servo2;
 const int RIGHT_TUBE_UP 						= 127;
-const int RIGHT_TUBE_DOWN 					= 5;
+const int RIGHT_TUBE_DOWN 					= 0;
+const int RIGHT_TUBE_STORED					= 255;
 
 // left servo for grabbing tubes
 const TServoIndex LEFT_TUBE_SERVO 	= servo3;
 const int LEFT_TUBE_UP 							= 127;
-const int LEFT_TUBE_DOWN 						= 250;
+const int LEFT_TUBE_DOWN 						= 255;
+const int LEFT_TUBE_STORED					= 0;
 
 // port for the gyro sensor
 const tSensors GYRO_PORT 						= S2;
 
 //port for IR sensor
 const tSensors IR_PORT 							= S3;
+
+void hideTubeServos()
+{
+	servo[RIGHT_TUBE_SERVO] = RIGHT_TUBE_STORED;
+	servo[LEFT_TUBE_SERVO] = LEFT_TUBE_STORED;
+}
 
 // resets the positions of all the servos
 void resetPositions()

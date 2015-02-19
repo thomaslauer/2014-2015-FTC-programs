@@ -7,6 +7,7 @@ const int nudgeSpeed = 25;
 
 void initializeRobot()
 {
+	resetPositions();
   return;
 }
 

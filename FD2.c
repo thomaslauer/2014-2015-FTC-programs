@@ -19,7 +19,13 @@ void init()
 task main()
 {
 	init();
+
+	// move forward
 	move(BACKWARD, 100, 600);
+
+	// turn towards the blue ramp
 	move(LEFT, 100, 500);
+
+	// ATTACK
 	move(BACKWARD, 100, 2000);
 }
