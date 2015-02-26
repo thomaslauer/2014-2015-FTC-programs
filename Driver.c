@@ -13,6 +13,9 @@ void initializeRobot()
 // task to run driver 2 stuff
 task scoring()
 {
+	moveTubeServo(UP);
+	servo[DUMP_SERVO] = DUMP_UP;
+
 	while(true)
 	{
 		getJoystickSettings(joystick);
