@@ -5,24 +5,26 @@
 
 Gyro g;
 
+#define TESTING true
+
 void init()
 {
+	hideTubeServos();
 	servo[DUMP_SERVO] = DUMP_UP;
-	resetPositions();
+	//resetPositions();
 	initGyro(g, S2);
 	calibrateGyro(g);
-	waitForStart();
-	moveTubeServo(UP);
-	raiseWinch();
+	if(!TESTING) waitForStart();
+	//moveTubeServo(UP);
+	//raiseWinch();
 }
 
 
 task main()
 {
 	init();
-	move(BACKWARD, 100, 1000);
-	gyroTurn(g, -80, 100);
-	move(BACKWARD, 100, 1350);
-
-
+	move(FORWARD, 100, 1000);
+	gyroTurn(g, -70, 100);
+	move(FORWARD, 100, 1900);
+	moveTubeServo(DOWN);
 }
