@@ -28,16 +28,12 @@ TO ADD AN ENTRY:
 	Try to have all the '=' line up across the page, it makes it look neat.
 	COMMENT TO SHOW WHAT THE CONSTANTS ARE FOR
 */
-
-<<<<<<< HEAD
-=======
 #pragma once
 #pragma systemFile
 
 
 // standard pragmas. we don't name anything with the pragmas, but instead use constants below.
 // this lets us give motors multiple names, and we get more flexability in naming things.
->>>>>>> origin/master
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  HTServo)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
 #pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
