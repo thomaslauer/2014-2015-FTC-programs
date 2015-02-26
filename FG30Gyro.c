@@ -41,7 +41,7 @@ task main()
 	wait1Msec(500);
 
 	//move forward towards the rolling goals
-	move(BACKWARD, 50, 2000);
+	move(BACKWARD, 50, 1800);
 
 	//moves the rest of the way slowly as to not knock the tube away
 	moveTubeServo(UP);
@@ -53,7 +53,7 @@ task main()
 
 	wait1Msec(500);
 	//raises the winch
-	moveWinch(75, 2800);
+	moveWinch(75, 2700);
 
 	//dumps the balls
 	servo[DUMP_SERVO] = DUMP_DOWN;
