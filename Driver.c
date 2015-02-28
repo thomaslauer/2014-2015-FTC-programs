@@ -12,44 +12,128 @@ void initializeRobot()
   return;
 }
 
+/*
+ * The old scoring control software, which we have kept around for
+ * future reference. After we finish the new scoring task,
+ * we can delete this one.
+ */
+
 // task to run driver 2 stuff
+//task scoring()
+//{
+//	moveTubeServo(UP);
+//	servo[DUMP_SERVO] = DUMP_UP;
+//
+//	while(true)
+//	{
+//		getJoystickSettings(joystick);
+//
+//		// controls for the servo tube grabbers
+//		if(joy2Btn(4))
+//		{
+//			moveTubeServo(UP);
+//		}
+//		if(joy2Btn(3))
+//		{
+//			moveTubeServo(DOWN);
+//		}
+//
+//		if(joy2Btn(6))
+//		{
+//			moveWinch(100);
+//		}
+//		else if(joy2Btn(5))
+//		{
+//			moveWinch(-100);
+//		}
+//		else
+//		{
+//			moveWinch(0);
+//		}
+//
+//		if(joy2Btn(1))
+//		{
+//			servo[DUMP_SERVO] = DUMP_UP;
+//		}
+//		else if(joy2Btn(2))
+//		{
+//			servo[DUMP_SERVO] = DUMP_DOWN;
+//		}
+//	}
+//}
+
+
+
 task scoring()
 {
+	// puts the servos into their correct positions
 	moveTubeServo(UP);
 	servo[DUMP_SERVO] = DUMP_UP;
 
+	resetWinchEncoder();
+
 	while(true)
 	{
-		getJoystickSettings(joystick);
+		if(joy2Btn(BTN_A))
+		{
+			startAutoWinch(convertDegreesToTicks(0 * 360));
+		}
+		if(joy2Btn(BTN_X))
+		{
+			startAutoWinch(convertDegreesToTicks(9 * 360));
+		}
+		if(joy2Btn(BTN_Y))
+		{
+			startAutoWinch(convertDegreesToTicks(13.5 * 360));
+		}
+		if(joy2Btn(BTN_B))
+		{
+			startAutoWinch(convertDegreesToTicks(18 * 360));
+		}
 
-		// controls for the servo tube grabbers
-		if(joy2Btn(4))
+		/*
+		if(joy2Btn(BTN_LB))
 		{
-			moveTubeServo(UP);
-		}
-		if(joy2Btn(3))
-		{
-			moveTubeServo(DOWN);
-		}
-
-		if(joy2Btn(6))
-		{
-			moveWinch(100);
-		}
-		else if(joy2Btn(5))
-		{
+			stopWinchControl();
 			moveWinch(-100);
+		}
+		else if(joy2Btn(BTN_RB))
+		{
+			stopWinchControl();
+			moveWinch(100);
 		}
 		else
 		{
+			if(!isPIDActive)
+			{
+				moveWinch(0);
+			}
+		}
+		*/
+
+		if(joystick.joy2_y1 >= 5 || joystick.joy2_y1 <= -5)
+		{
+
+			stopWinchControl();
+			moveWinch(joystick.joy2_y1);
+		}
+		else if(!isPIDActive)
+		{
+
 			moveWinch(0);
 		}
 
-		if(joy2Btn(1))
+		if(joy2Btn(BTN_START))
+		{
+			stopWinchControl();
+			resetWinchEncoder();
+		}
+
+		if(joy2Btn(BTN_LB))
 		{
 			servo[DUMP_SERVO] = DUMP_UP;
 		}
-		else if(joy2Btn(2))
+		else if(joy2Btn(BTN_RB))
 		{
 			servo[DUMP_SERVO] = DUMP_DOWN;
 		}
@@ -151,6 +235,15 @@ task main()
 		else
 		{
 			motor[SPINNER_MOTOR] = 0;
+		}
+
+		if(joy1Btn(4))
+		{
+			moveTubeServo(UP);
+		}
+		if(joy1Btn(3))
+		{
+			moveTubeServo(DOWN);
 		}
   }
 }

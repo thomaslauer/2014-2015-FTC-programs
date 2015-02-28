@@ -4,10 +4,16 @@
 #include "hardwareDefinitions.h"
 #include "PID.h"
 
+// TODO: Add constants for different winch heights in hardwareDefinitions
+
 bool isPIDActive = false;
 int winchPidTarget = 0;
 PID winchPidController;
 
+/*
+ * The winch control task, which uses a PID controller to predict the best values
+ * so we quickly get to the target and don't overshoot it
+ */
 task WinchTask()
 {
 	initPID(winchPidController, 0.05, 0, 2, winchPidTarget, T2);
@@ -16,20 +22,32 @@ task WinchTask()
 	{
 		int power = getPIDValue(winchPidController, nMotorEncoder[RIGHT_WINCH]);
 		moveWinch(power);
+		//playImmediateTone(440, 10);
 	}
 	moveWinch(0);
-}
-
-
-// starts the auto winch control
-void startAutoWinch(int target)
-{
-	winchPidTarget = target;
-	startTask(WinchTask);
 }
 
 // stops the loop in the WinchTask
 void stopWinchControl()
 {
 	isPIDActive = false;
+}
+
+// starts the auto winch control
+void startAutoWinch(int target)
+{
+	stopWinchControl();
+	winchPidTarget = target;
+	startTask(WinchTask);
+}
+
+//used to convert user input into someting the PID controler can use
+int convertDegreesToTicks(int degrees)
+{
+	return ((float)degrees/360.0) * 1440.0;
+}
+
+void resetWinchEncoder()
+{
+	nMotorEncoder[RIGHT_WINCH] = 0;
 }

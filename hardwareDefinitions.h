@@ -50,6 +50,7 @@ TO ADD AN ENTRY:
 #pragma config(Servo,  srvo_S1_C4_6,    servo6,               tServoNone)
 
 #include "JoystickDriver.c"
+#include "JoystickButtons.h"
 
 #pragma once
 #pragma systemFile
