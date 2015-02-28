@@ -1,6 +1,7 @@
 #include "hardwareDefinitions.h"
 #include "motorControl.h"
 #include "driverUtils.h"
+#include "winchControl.h"
 #include "JoystickDriver.c"  //Include file to "handle" the Bluetooth messages.
 
 const int nudgeSpeed = 25;
