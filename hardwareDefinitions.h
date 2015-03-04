@@ -36,6 +36,7 @@ TO ADD AN ENTRY:
 // this lets us give motors multiple names, and we get more flexability in naming things.
 #pragma config(Hubs,  S1, HTMotor,  HTMotor,  HTMotor,  HTServo)
 #pragma config(Sensor, S1,     ,               sensorI2CMuxController)
+#pragma config(Sensor, S3,     ,               sensorSONAR)
 #pragma config(Motor,  mtr_S1_C1_1,     motorD,        tmotorTetrix, openLoop)
 #pragma config(Motor,  mtr_S1_C1_2,     motorE,        tmotorTetrix, openLoop, reversed)
 #pragma config(Motor,  mtr_S1_C2_1,     motorF,        tmotorTetrix, openLoop)
@@ -49,8 +50,12 @@ TO ADD AN ENTRY:
 #pragma config(Servo,  srvo_S1_C4_5,    servo5,               tServoNone)
 #pragma config(Servo,  srvo_S1_C4_6,    servo6,               tServoNone)
 
+#ifndef NO_JOYSTICK
 #include "JoystickDriver.c"
+#endif
 #include "JoystickButtons.h"
+
+//#include "lego-ultrasound.h"
 
 #pragma once
 #pragma systemFile
@@ -67,37 +72,24 @@ const tMotor SPINNER_MOTOR 					= motorH;
 
 // the dumper servo on the schlorp tube
 const TServoIndex DUMP_SERVO 				= servo1;
-const int DUMP_UP 									= 245;
+const int DUMP_UP 									= 215;
 const int DUMP_DOWN 								= 80;
 
 // right servo for grabbing tubes
-const TServoIndex RIGHT_TUBE_SERVO 	= servo2;
-const int RIGHT_TUBE_UP 						= 127;
-const int RIGHT_TUBE_DOWN 					= 0;
-const int RIGHT_TUBE_STORED					= 255;
-
-// left servo for grabbing tubes
-const TServoIndex LEFT_TUBE_SERVO 	= servo3;
-const int LEFT_TUBE_UP 							= 127;
-const int LEFT_TUBE_DOWN 						= 255;
-const int LEFT_TUBE_STORED					= 0;
+const TServoIndex TUBE_SERVO	= servo2;
+const int TUBE_UP 						= 200;
+const int TUBE_DOWN 					= 127;
+const int TUBE_MED						= 155;
 
 // port for the gyro sensor
 const tSensors GYRO_PORT 						= S2;
 
-//port for IR sensor
-const tSensors IR_PORT 							= S3;
-
-void hideTubeServos()
-{
-	servo[RIGHT_TUBE_SERVO] = RIGHT_TUBE_STORED;
-	servo[LEFT_TUBE_SERVO] = LEFT_TUBE_STORED;
-}
+// port for the Ultrasonic Sensor
+const tSensors ULTRASONIC_PORT 			= S3;
 
 // resets the positions of all the servos
 void resetPositions()
 {
-	servo[DUMP_SERVO] 								= DUMP_UP;
-	servo[RIGHT_TUBE_SERVO] 					= RIGHT_TUBE_DOWN;
-	servo[LEFT_TUBE_SERVO] 						= LEFT_TUBE_DOWN;
+	servo[DUMP_SERVO] = DUMP_UP;
+	servo[TUBE_SERVO] = TUBE_UP;
 }

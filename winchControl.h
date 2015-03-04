@@ -4,7 +4,10 @@
 #include "hardwareDefinitions.h"
 #include "PID.h"
 
-// TODO: Add constants for different winch heights in hardwareDefinitions
+const float HOME = 0;
+const float GOAL_60 = 9;
+const float GOAL_90 = 13.5;
+const float GOAL_120 = 18;
 
 bool isPIDActive = false;
 int winchPidTarget = 0;

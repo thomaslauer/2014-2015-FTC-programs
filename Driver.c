@@ -12,58 +12,6 @@ void initializeRobot()
   return;
 }
 
-/*
- * The old scoring control software, which we have kept around for
- * future reference. After we finish the new scoring task,
- * we can delete this one.
- */
-
-// task to run driver 2 stuff
-//task scoring()
-//{
-//	moveTubeServo(UP);
-//	servo[DUMP_SERVO] = DUMP_UP;
-//
-//	while(true)
-//	{
-//		getJoystickSettings(joystick);
-//
-//		// controls for the servo tube grabbers
-//		if(joy2Btn(4))
-//		{
-//			moveTubeServo(UP);
-//		}
-//		if(joy2Btn(3))
-//		{
-//			moveTubeServo(DOWN);
-//		}
-//
-//		if(joy2Btn(6))
-//		{
-//			moveWinch(100);
-//		}
-//		else if(joy2Btn(5))
-//		{
-//			moveWinch(-100);
-//		}
-//		else
-//		{
-//			moveWinch(0);
-//		}
-//
-//		if(joy2Btn(1))
-//		{
-//			servo[DUMP_SERVO] = DUMP_UP;
-//		}
-//		else if(joy2Btn(2))
-//		{
-//			servo[DUMP_SERVO] = DUMP_DOWN;
-//		}
-//	}
-//}
-
-
-
 task scoring()
 {
 	// puts the servos into their correct positions
@@ -74,23 +22,32 @@ task scoring()
 
 	while(true)
 	{
+
+		// start automatic winch control
+
+		// home
 		if(joy2Btn(BTN_A))
 		{
-			startAutoWinch(convertDegreesToTicks(0 * 360));
+			startAutoWinch(convertDegreesToTicks(HOME * 360));
 		}
+		// 60cm goal
 		if(joy2Btn(BTN_X))
 		{
-			startAutoWinch(convertDegreesToTicks(9 * 360));
+			startAutoWinch(convertDegreesToTicks(GOAL_60 * 360));
 		}
+		// 90cm goal
 		if(joy2Btn(BTN_Y))
 		{
-			startAutoWinch(convertDegreesToTicks(13.5 * 360));
+			startAutoWinch(convertDegreesToTicks(GOAL_90 * 360));
 		}
+		// 120cm goal
 		if(joy2Btn(BTN_B))
 		{
-			startAutoWinch(convertDegreesToTicks(18 * 360));
+			startAutoWinch(convertDegreesToTicks(GOAL_120 * 360));
 		}
+		// end automatic winch control
 
+		// START old button winch control
 		/*
 		if(joy2Btn(BTN_LB))
 		{
@@ -110,6 +67,8 @@ task scoring()
 			}
 		}
 		*/
+		// END old button winch control
+
 
 		if(joystick.joy2_y1 >= 5 || joystick.joy2_y1 <= -5)
 		{
@@ -136,6 +95,20 @@ task scoring()
 		else if(joy2Btn(BTN_RB))
 		{
 			servo[DUMP_SERVO] = DUMP_DOWN;
+		}
+
+		// spinner controls
+		if(joy2Btn(BTN_LT))
+		{
+			motor[SPINNER_MOTOR] = 75;
+		}
+		else if(joy2Btn(BTN_RT))
+		{
+			motor[SPINNER_MOTOR] = -75;
+		}
+		else
+		{
+			motor[SPINNER_MOTOR] = 0;
 		}
 	}
 }
@@ -223,27 +196,15 @@ task main()
 			}
 		}
 
-		// spinner controls
-		if(joy1Btn(5))
-		{
-			motor[SPINNER_MOTOR] = 75;
-		}
-		else if(joy1Btn(6))
-		{
-			motor[SPINNER_MOTOR] = -75;
-		}
-		else
-		{
-			motor[SPINNER_MOTOR] = 0;
-		}
 
-		if(joy1Btn(4))
+
+		if(joy1Btn(BTN_Y))
 		{
-			moveTubeServo(UP);
+			servo[TUBE_SERVO] = TUBE_UP;
 		}
-		if(joy1Btn(3))
+		if(joy1Btn(BTN_B))
 		{
-			moveTubeServo(DOWN);
+			servo[TUBE_SERVO] = TUBE_DOWN;
 		}
   }
 }

@@ -74,7 +74,7 @@ void move(MoveDirections direction, int speed, int duration)
 // positions for the tube servos
 enum TubeServoPositions
 {
-	UP, DOWN, STORE
+	UP, DOWN, MED
 };
 
 // method for moving the goal grabbing servos
@@ -82,18 +82,15 @@ void moveTubeServo(TubeServoPositions position)
 {
 	if(position == UP)
 	{
-		servo[LEFT_TUBE_SERVO] = LEFT_TUBE_UP;
-		servo[RIGHT_TUBE_SERVO] = RIGHT_TUBE_UP;
+		servo[TUBE_SERVO] = TUBE_UP;
 	}
 	if(position == DOWN)
 	{
-		servo[LEFT_TUBE_SERVO] = LEFT_TUBE_DOWN;
-		servo[RIGHT_TUBE_SERVO] = RIGHT_TUBE_DOWN;
+		servo[TUBE_SERVO] = TUBE_DOWN;
 	}
-	if(position == STORE)
+	if(position == MED)
 	{
-		servo[LEFT_TUBE_SERVO] = LEFT_TUBE_STORED;
-		servo[RIGHT_TUBE_SERVO] = RIGHT_TUBE_STORED;
+		servo[TUBE_SERVO] = TUBE_MED;
 	}
 }
 
