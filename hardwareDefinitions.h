@@ -91,5 +91,5 @@ const tSensors ULTRASONIC_PORT 			= S3;
 void resetPositions()
 {
 	servo[DUMP_SERVO] = DUMP_UP;
-	servo[TUBE_SERVO] = TUBE_UP;
+	servo[TUBE_SERVO] = TUBE_DOWN;
 }
