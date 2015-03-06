@@ -3,7 +3,7 @@
 #include "motorControl.h"
 #include "winchControl.h"
 
-#define Testing true
+#define Testing false
 
 Gyro g;
 

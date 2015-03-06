@@ -1,16 +1,17 @@
 #include "hardwareDefinitions.h"
 #include "motorControl.h"
+#include "winchControl.h"
 
-#define DEBUG false
+#define DEBUG true
 
 Gyro g;
 
 void init(){
-	servo[DUMP_SERVO] = DUMP_UP;
 	initGyro(g, S2);
 	calibrateGyro(g);
+	resetWinchEncoder();
 	servo[DUMP_SERVO] = DUMP_UP;
-	moveTubeServo(STORE);
+	servo[TUBE_SERVO] = TUBE_UP;
 }
 
 task main()
@@ -26,25 +27,33 @@ task main()
 	// weight in our robot
 	motor[RIGHT_DRIVE_MOTOR] = -90;
 	motor[LEFT_DRIVE_MOTOR] = -100;
-	wait1Msec(2200);
+	wait1Msec(2000);
 
 	// stops at the bottom
 	move(STOP, 0, 200);
 
 	// turn we can add in to make the program more accurate
-	gyroTurn(g, -5, 100);
+	//gyroTurn(g, -5, 100);
 
-	motor[RIGHT_DRIVE_MOTOR] = -20;
-	motor[LEFT_DRIVE_MOTOR] = -20;
-
+	motor[RIGHT_DRIVE_MOTOR] = -10;
+	motor[LEFT_DRIVE_MOTOR] = -10;
+	wait1Msec(2000);
 	moveTubeServo(DOWN);
-	wait1Msec(1500);
+	wait1Msec(1000);
 	move(STOP, 0, 0);
+
+	gyroTurn(g, 20, 75);
+	gyroTurn(g, -20, 75);
 
 	wait1Msec(500);
 
+	servo[TUBE_SERVO] = TUBE_UP;
+
 	//raises the winch
-	moveWinch(75, 4350);
+	//moveWinch(75, 4350);
+	startAutoWinch(convertDegreesToTicks(GOAL_60 * 360));
+
+	wait1Msec(6000);
 
 	//dumps the balls
 	servo[DUMP_SERVO] = DUMP_DOWN;
@@ -56,5 +65,6 @@ task main()
 	servo[DUMP_SERVO] = DUMP_UP;
 
 	//lowers the winch again
-	moveWinch(-75, 3800);
+	startAutoWinch(convertDegreesToTicks(0 * 360));
+	while(true){}
 }
