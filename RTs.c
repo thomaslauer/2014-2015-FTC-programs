@@ -2,7 +2,7 @@
 #include "motorControl.h"
 #include "winchControl.h"
 
-#define DEBUG true
+#define DEBUG false
 
 Gyro g;
 
