@@ -3,6 +3,7 @@
 
 #include "hardwareDefinitions.h"
 #include "PID.h"
+#include "motorControl.h"
 
 const float HOME = 0;
 const float GOAL_60 = 9;
@@ -19,6 +20,7 @@ PID winchPidController;
  */
 task WinchTask()
 {
+	servo[DUMP_SERVO] = DUMP_UP;
 	initPID(winchPidController, 0.05, 0, 2, winchPidTarget, T2);
 	isPIDActive = true;
 	while(isPIDActive)

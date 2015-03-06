@@ -98,11 +98,11 @@ task scoring()
 		}
 
 		// spinner controls
-		if(joy2Btn(BTN_LT))
+		if(joy2Btn(BTN_RT))
 		{
 			motor[SPINNER_MOTOR] = 75;
 		}
-		else if(joy2Btn(BTN_RT))
+		else if(joy2Btn(BTN_LT))
 		{
 			motor[SPINNER_MOTOR] = -75;
 		}

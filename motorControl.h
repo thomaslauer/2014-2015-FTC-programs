@@ -141,8 +141,8 @@ updateGyro(g);
 
 void gyroTurn(Gyro &g, int angle, int power)
 {
-	const float returningSpeed = 0.5;
-
+	const float leftReturningSpeed = 0.75;
+	const float rightReturningSpeed = 0.75;
 	resetGyro(g);
 
 	angle = angle * -1;
@@ -163,9 +163,9 @@ void gyroTurn(Gyro &g, int angle, int power)
 				//playImmediateTone(440, 100);
 			}
 			if (returning){
-				motor[RIGHT_DRIVE_MOTOR] = -((float)power * returningSpeed);
+				motor[RIGHT_DRIVE_MOTOR] = -((float)power * rightReturningSpeed);
 				//motor[RIGHT_DRIVE_MOTOR] = 0;
-				motor[LEFT_DRIVE_MOTOR] = ((float)power * returningSpeed);
+				motor[LEFT_DRIVE_MOTOR] = ((float)power * rightReturningSpeed);
 				if (abs(g.heading) < abs(angle)){
 					running = false;
 					writeDebugStreamLine("Final GyroVal: %f", gyroVal);
@@ -191,8 +191,8 @@ void gyroTurn(Gyro &g, int angle, int power)
 				//playImmediateTone(440, 100);
 			}
 			if (returning){
-				motor[RIGHT_DRIVE_MOTOR] = ((float)power * returningSpeed);
-				motor[LEFT_DRIVE_MOTOR] = -((float)power * returningSpeed);
+				motor[RIGHT_DRIVE_MOTOR] = ((float)power * leftReturningSpeed);
+				motor[LEFT_DRIVE_MOTOR] = -((float)power * leftReturningSpeed);
 				//motor[LEFT_DRIVE_MOTOR] = 0;
 				if (abs(g.heading) < abs(angle)){
 					running = false;
